@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {connect} from "react-redux";
+import { deleteAccount } from "../actions/accountActions";
 
 const AccountInfo = ({
   id,
@@ -10,7 +12,7 @@ const AccountInfo = ({
   bank_branch,
   deleteAccount
 }) => {
-  const removeAccount = () => {
+  const removeAccount = (e) => {
     deleteAccount(id);
   };
   return (
@@ -48,7 +50,7 @@ const AccountInfo = ({
         <Link to={`/edit-account/${id}`} className="card-footer-item">
           Edit
         </Link>
-        <a onClick={removeAccount} className="card-footer-item">
+        <a href onClick={removeAccount} className="card-footer-item">
           Delete
         </a>
       </footer>
@@ -56,4 +58,8 @@ const AccountInfo = ({
   );
 };
 
-export default AccountInfo;
+const mapDispatchToProps = {
+  deleteAccount
+}
+
+export default connect(null, mapDispatchToProps) (AccountInfo);

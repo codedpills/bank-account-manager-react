@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
+import {editAccount} from "../actions/accountActions";
+
 
 class EditAccount extends Component {
   constructor(props) {
@@ -139,5 +142,14 @@ class EditAccount extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => ({
+  account: state.accounts.find(
+    (account) => account.id === ownProps.match.params.id
+  ),
+});
 
-export default EditAccount;
+const mapDispatchToProps = {
+  editAccount
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (EditAccount);

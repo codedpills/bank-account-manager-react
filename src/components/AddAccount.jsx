@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
+import {addAccount} from "../actions/accountActions"; 
 
 class AddAccount extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class AddAccount extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addAccount(this.state);
+    this.props.addNewAccount(this.state);
     this.setState({
       account_name: "",
       account_number: "",
@@ -136,4 +138,8 @@ class AddAccount extends Component {
   }
 }
 
-export default AddAccount;
+const mapDispatchToProps = { 
+  addNewAccount : addAccount
+}
+
+export default connect(null, mapDispatchToProps) (AddAccount);
